@@ -1,5 +1,8 @@
 # MMM-XmasCountdown
 
+<img width="256" height="301" alt="image" src="https://github.com/user-attachments/assets/3b30c515-eaf1-444d-ab0e-416404fa2eb4" />
+
+
 A festive Christmas countdown module for MagicMirror² featuring animated emoji graphics.
 
 ## Features
