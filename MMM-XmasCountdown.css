@@ -1,0 +1,262 @@
+.xmas-wrapper {
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 400px;
+  max-width: 100%;
+}
+
+.xmas-wrapper #xmas-tree-container {
+  margin: 0 auto 20px;
+  width: 200px;
+}
+
+.xmas-wrapper .xmas-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: sway 4s ease-in-out infinite;
+}
+
+.xmas-wrapper .tree-star {
+  font-size: 40px;
+  animation: twinkle 1s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 10px gold);
+}
+
+.xmas-wrapper .tree-lights {
+  display: flex;
+  gap: 15px;
+  margin: 5px 0;
+}
+
+.xmas-wrapper .light {
+  font-size: 20px;
+  animation: blink 1.5s infinite;
+}
+
+.xmas-wrapper .light-red {
+  color: #ff0000;
+  animation-delay: 0s;
+}
+
+.xmas-wrapper .light-blue {
+  color: #00bfff;
+  animation-delay: 0.5s;
+}
+
+.xmas-wrapper .light-yellow {
+  color: #ffeb3b;
+  animation-delay: 1s;
+}
+
+.xmas-wrapper .tree-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.xmas-wrapper .tree-layer {
+  font-size: 50px;
+  line-height: 0.7;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.3));
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.xmas-wrapper .tree-layer:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.xmas-wrapper .tree-layer:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.xmas-wrapper .tree-layer:nth-child(3) {
+  animation-delay: 2s;
+}
+
+.xmas-wrapper .tree-trunk {
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+.xmas-wrapper .tree-presents-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  gap: 2px;
+}
+
+.xmas-wrapper .presents-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.xmas-wrapper .present-item {
+  font-size: 22px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.xmas-wrapper #xmas-countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.xmas-wrapper .countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.xmas-wrapper .countdown-number {
+  font-size: 56px;
+  font-weight: bold;
+  color: #ffeb3b;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+  line-height: 1;
+  min-width: 80px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+
+.xmas-wrapper .countdown-label {
+  font-size: 16px;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 2px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1.2) rotate(180deg);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.3;
+    filter: brightness(0.5);
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.3)) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.6)) brightness(1.2);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Low Power Mode - Disable all animations */
+.xmas-wrapper.low-power .xmas-tree,
+.xmas-wrapper.low-power .tree-star,
+.xmas-wrapper.low-power .light,
+.xmas-wrapper.low-power .tree-layer,
+.xmas-wrapper.low-power .present-item,
+.xmas-wrapper.low-power .countdown-number {
+  animation: none !important;
+}
+
+.xmas-wrapper.low-power .tree-star {
+  filter: none;
+}
+
+.xmas-wrapper.low-power .light {
+  opacity: 1;
+}
+
+.xmas-wrapper.low-power .tree-layer {
+  filter: none;
+}
+
+/* Individual Animation Controls */
+.xmas-wrapper.no-star-anim .tree-star {
+  animation: none !important;
+  filter: none;
+}
+
+.xmas-wrapper.no-lights-anim .light {
+  animation: none !important;
+  opacity: 1;
+}
+
+.xmas-wrapper.no-sway-anim .xmas-tree {
+  animation: none !important;
+}
+
+.xmas-wrapper.no-shimmer-anim .tree-layer {
+  animation: none !important;
+  filter: none;
+}
+
+.xmas-wrapper.no-presents-anim .present-item {
+  animation: none !important;
+}
+
+.xmas-wrapper.no-countdown-anim .countdown-number {
+  animation: none !important;
+}
