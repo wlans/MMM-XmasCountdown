@@ -1,13 +1,16 @@
 # MMM-XmasCountdown
 
-A festive Christmas countdown module for MagicMirror² featuring animated Lottie graphics.
+A festive Christmas countdown module for MagicMirror² featuring animated emoji graphics.
 
 ## Features
 * Real-time countdown to Christmas
-* Animated Santa Lottie animation
+* Animated Christmas tree with twinkling star
+* Blinking colored lights
+* Presents that stack up as Christmas approaches (more presents = closer to Christmas!)
 * Customizable target date and time
 * Optional seconds display
-* Animated pulsing countdown text
+* Granular animation controls
+* Low power mode option
 
 ## Installation
 
@@ -18,16 +21,8 @@ cd ~/MagicMirror/modules
 
 2. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/MMM-XmasCountdown.git
+git clone https://github.com/wlans/MMM-XmasCountdown.git
 ```
-
-3. Install dependencies:
-```bash
-cd MMM-XmasCountdown
-npm install
-```
-
-4. Add a Lottie animation file to the `assets` folder (e.g., `santa.json`). You can find free Lottie animations at [LottieFiles](https://lottiefiles.com/).
 
 ## Configuration
 
@@ -39,9 +34,17 @@ Add the module to your `config/config.js` file:
   position: "top_center",
   config: {
     target: "2025-12-25T00:00:00",
-    header: "🎅 Santa is Coming!",
-    lottieFile: "assets/santa.json",
-    showSeconds: true
+    showSeconds: true,
+    showTree: true,
+    lowPowerMode: false,
+    animations: {
+      star: true,        // Twinkling star on top of tree
+      lights: true,      // Blinking Christmas lights
+      sway: true,        // Swaying tree motion
+      shimmer: true,     // Shimmering tree layers
+      presents: true,    // Bouncing presents
+      countdown: true    // Pulsing countdown numbers
+    }
   }
 }
 ```
@@ -51,17 +54,20 @@ Add the module to your `config/config.js` file:
 | Option | Default | Description |
 |--------|---------|-------------|
 | `target` | `"2025-12-25T00:00:00"` | Target date and time for the countdown (ISO 8601 format) |
-| `header` | `"🎅 Santa is Coming!"` | Header text displayed above the animation |
-| `lottieFile` | `"assets/santa.json"` | Path to the Lottie animation JSON file (relative to module folder) |
 | `showSeconds` | `true` | Whether to show seconds in the countdown |
+| `showTree` | `true` | Whether to display the animated Christmas tree |
+| `lowPowerMode` | `false` | Disables all animations to save power/resources |
+| `animations` | (see above) | Object to enable/disable individual animations |
 
-## Finding Lottie Animations
+### Animation Options
 
-1. Visit [LottieFiles.com](https://lottiefiles.com/)
-2. Search for "Santa", "Christmas", or any holiday theme
-3. Download the Lottie JSON file
-4. Save it to `modules/MMM-XmasCountdown/assets/`
-5. Update the `lottieFile` config option with the filename
+Each animation can be individually controlled via the `animations` config object:
+- **star**: Twinkling star animation on top of the tree
+- **lights**: Blinking colored Christmas lights
+- **sway**: Gentle swaying motion of the tree
+- **shimmer**: Shimmering effect on tree layers
+- **presents**: Bouncing animation on gift boxes
+- **countdown**: Pulsing effect on countdown numbers
 
 ## License
 
