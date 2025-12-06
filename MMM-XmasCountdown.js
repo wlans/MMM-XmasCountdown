@@ -11,7 +11,12 @@ Module.register("MMM-XmasCountdown", {
             shimmer: true,     // Shimmering tree layers
             presents: true,    // Bouncing presents
             countdown: true    // Pulsing countdown numbers
-        }
+        },
+        presentEmojis: [
+            { emoji: "🎁", weight: 50 },  // 50% chance
+            { emoji: "🎀", weight: 30 },  // 30% chance
+            { emoji: "📦", weight: 20 }   // 20% chance
+        ]
     },
 
     start: function () {
@@ -22,6 +27,22 @@ Module.register("MMM-XmasCountdown", {
         this.uniqueId = this.identifier; // Use MagicMirror's unique module identifier
         this.updateTimer();
         setInterval(() => this.updateTimer(), 1000);
+    },
+
+    getRandomPresent: function () {
+        // Weighted random selection based on probabilities
+        const totalWeight = this.config.presentEmojis.reduce((sum, item) => sum + item.weight, 0);
+        let random = Math.random() * totalWeight;
+
+        for (const item of this.config.presentEmojis) {
+            random -= item.weight;
+            if (random <= 0) {
+                return item.emoji;
+            }
+        }
+
+        // Fallback to first emoji if something goes wrong
+        return this.config.presentEmojis[0].emoji;
     },
 
     updateTimer: function () {
@@ -102,12 +123,12 @@ Module.register("MMM-XmasCountdown", {
             wrapper.appendChild(treeContainer);
 
             // Add stacked presents - more presents as Christmas gets closer!
-            // 25 days out = 0 presents, 0 days out = 25 presents
+            // Dec 1 = 1 present, Dec 2 = 2 presents, ..., Dec 25 = 25 presents
             const presentsStack = treeContainer.querySelector(".tree-presents-stack");
             if (presentsStack) {
-                const presentEmojis = ["🎁", "🎀", "📦"];
-                const daysRemaining = this.days + 1; // Count today as a full day
-                const presentsToShow = Math.max(0, 25 - daysRemaining); // Inverse: closer = more presents
+                const now = new Date();
+                const dayOfDecember = now.getDate(); // 1-31
+                const presentsToShow = Math.min(dayOfDecember, 25); // Show present count based on day of December
 
                 let presentIndex = 0;
                 let row = 1;
@@ -122,7 +143,7 @@ Module.register("MMM-XmasCountdown", {
                         const present = document.createElement("span");
                         present.className = "present-item";
                         present.style.animationDelay = (presentIndex * 0.1) + "s";
-                        present.textContent = presentEmojis[presentIndex % presentEmojis.length];
+                        present.textContent = this.getRandomPresent();
                         rowDiv.appendChild(present);
                         presentIndex++;
                     }

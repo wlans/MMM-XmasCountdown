@@ -44,7 +44,12 @@ Add the module to your `config/config.js` file:
       shimmer: true,     // Shimmering tree layers
       presents: true,    // Bouncing presents
       countdown: true    // Pulsing countdown numbers
-    }
+    },
+    presentEmojis: [
+      { emoji: "🎁", weight: 50 },  // 50% chance - wrapped gift
+      { emoji: "🎀", weight: 30 },  // 30% chance - ribbon
+      { emoji: "📦", weight: 20 }   // 20% chance - box
+    ]
   }
 }
 ```
@@ -58,6 +63,7 @@ Add the module to your `config/config.js` file:
 | `showTree` | `true` | Whether to display the animated Christmas tree |
 | `lowPowerMode` | `false` | Disables all animations to save power/resources |
 | `animations` | (see above) | Object to enable/disable individual animations |
+| `presentEmojis` | (see above) | Array of present emoji objects with weighted probabilities |
 
 ### Animation Options
 
@@ -68,6 +74,25 @@ Each animation can be individually controlled via the `animations` config object
 - **shimmer**: Shimmering effect on tree layers
 - **presents**: Bouncing animation on gift boxes
 - **countdown**: Pulsing effect on countdown numbers
+
+### Present Emoji Customization
+
+The `presentEmojis` option allows you to customize which present emojis appear under the tree and their probability:
+
+```javascript
+presentEmojis: [
+  { emoji: "🎁", weight: 50 },  // 50% chance
+  { emoji: "🎀", weight: 30 },  // 30% chance
+  { emoji: "📦", weight: 20 }   // 20% chance
+]
+```
+
+- **emoji**: Any emoji you want to use for presents
+- **weight**: Relative probability (weights are normalized to percentages)
+
+You can add as many emoji options as you like! Try other Christmas emojis like 🎄, 🎅, 🤶, 🎉, or ⛄.
+
+**How presents appear**: The module displays presents that accumulate throughout December - on December 1st you'll see 1 present, December 6th shows 6 presents, and by December 25th there will be 25 presents stacked under the tree!
 
 ## License
 
