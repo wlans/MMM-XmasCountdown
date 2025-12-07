@@ -25,8 +25,19 @@ Module.register("MMM-XmasCountdown", {
         this.minutes = 0;
         this.seconds = 0;
         this.uniqueId = this.identifier; // Use MagicMirror's unique module identifier
+        this.presentsToShow = 0; // Will be set by node_helper
         this.updateTimer();
         setInterval(() => this.updateTimer(), 1000);
+
+        // Request current date from node_helper
+        this.sendSocketNotification("GET_CURRENT_DATE");
+    },
+
+    socketNotificationReceived: function (notification, payload) {
+        if (notification === "CURRENT_DATE_RESULT") {
+            this.presentsToShow = payload.presentsToShow;
+            this.updateDom(); // Refresh the DOM with correct number of presents
+        }
     },
 
     getRandomPresent: function () {
@@ -126,9 +137,8 @@ Module.register("MMM-XmasCountdown", {
             // Dec 1 = 1 present, Dec 2 = 2 presents, ..., Dec 25 = 25 presents
             const presentsStack = treeContainer.querySelector(".tree-presents-stack");
             if (presentsStack) {
-                const now = new Date();
-                const dayOfDecember = now.getDate(); // 1-31
-                const presentsToShow = Math.min(dayOfDecember, 25); // Show present count based on day of December
+                // Use presents count from node_helper
+                const presentsToShow = this.presentsToShow;
 
                 let presentIndex = 0;
                 let row = 1;
